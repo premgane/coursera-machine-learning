@@ -1,6 +1,6 @@
 # coursera-machine-learning
 
-Code and notes for Andrew Ng's Machine Learning course on Coursera
+Code and notes for Andrew Ng's Machine Learning course on Coursera. I started the course on September 19, 2016.
 
 # Notes
 
