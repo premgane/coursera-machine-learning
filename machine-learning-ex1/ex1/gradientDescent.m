@@ -17,10 +17,18 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
+    theta_length = length(theta);
+    cost_deriv = zeros(theta_length, 1);
 
+    for j = 1:theta_length,
+    	sum = 0;
+	for i = 1:m,
+		sum = sum + ((theta' * X(i,:)' - y(i)) * X(i,:)');
+	end
+	cost_deriv = sum;
+    end
 
-
-
+    theta = theta - ((alpha/m) * cost_deriv);
 
 
     % ============================================================
