@@ -22,10 +22,16 @@ p = zeros(size(X, 1), 1);
 %
 
 
+a_1 = [ones(m,1) X];
 
+a_2 = [ones(1,size(a_1,1)); sigmoid(Theta1 * a_1')];
 
+a_3 = sigmoid(Theta2 * a_2);
+% a_3 is 10x5000
 
-
+for i=1:length(p),
+	[tmp, p(i)] = max(a_3(:,i)', [], 2);
+end;
 
 
 
