@@ -10,9 +10,16 @@ g = zeros(size(z));
 %               vector or scalar).
 
 
-
+g = arrayfun(@scalarsigmoid, z);
 
 
 % =============================================================
+
+end
+
+function gval = scalarsigmoid(z)
+% SCALARSIGMOID Compute sigmoid function on a scalar
+
+gval = 1 / (1 + e^(-z));
 
 end

@@ -20,13 +20,35 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+errors = zeros(m,1);
+error_changerate = zeros(size(X));
+
+for i=1:m,
+	h = hypo(theta, X(i,:)');
+	errors(i) = ( -y(i)*log(h) - ( (1-y(i))*log(1-h) ) );
 
 
+	for j=1:size(theta),
+		error_changerate(i,j) = (hypo(theta, X(i,:)') - y(i)) * X(i,j);
+	end;
 
+end;
 
+J = sum(errors) / m;
 
+for j=1:size(theta),
+	grad(j) = sum(error_changerate(:,j)) / m;
+end;
 
 
 % =============================================================
+
+end
+
+function predictedY = hypo(theta, x)
+% HYPO Predict the hypothesis function for logistic regression
+%      where theta and x are column vectors
+
+predictedY = sigmoid(theta' * x);
 
 end
