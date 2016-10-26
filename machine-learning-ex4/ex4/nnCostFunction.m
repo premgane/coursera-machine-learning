@@ -93,8 +93,16 @@ J = J + reg;
 % Error of rightmost layer
 d3 = a3 .- y_matrix;
 
+% Error of second-to-last layer
 d2 = (d3 * Theta2(:,2:end)) .* sigmoidGradient(z2);
-size(d2)
+
+% Cumulative errors
+Delta1 = d2' * a1;
+
+Delta2 = d3' * a2;
+
+
+
 
 
 % -------------------------------------------------------------
