@@ -101,9 +101,22 @@ Delta1 = d2' * a1;
 
 Delta2 = d3' * a2;
 
+% Scale it down to average delta per training example
+Theta1_grad = (1/m) .* Delta1;
 
+Theta2_grad = (1/m) .* Delta2;
 
+% Regularize backprop
 
+% Column 1 set to 0
+Theta1(:,1) = 0;
+Theta2(:,1) = 0;
+
+Theta1 = (lambda/m) * Theta1;
+Theta2 = (lambda/m) * Theta2;
+
+Theta1_grad = Theta1_grad + Theta1;
+Theta2_grad = Theta2_grad + Theta2;
 
 % -------------------------------------------------------------
 
