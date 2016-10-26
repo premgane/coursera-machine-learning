@@ -82,8 +82,10 @@ y_matrix = eye(num_labels)(y,:);
 % Cost, unregularized
 J = (-1/m) * sum(sum( y_matrix .* log(a3) .+ (1-y_matrix).*log(1-a3),1 ),2);
 
+% Regularization component
+reg = (lambda/(2*m)) * sum(sum(Theta1(1:end,2:end) .^ 2,1),2) + sum(sum(Theta2(1:end,2:end) .^ 2 ,1),2);
 
-
+J = J + reg;
 
 % -------------------------------------------------------------
 
