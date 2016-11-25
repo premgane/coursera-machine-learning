@@ -8,8 +8,12 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
 %
 
 % You need to return the following variables correctly.
-C = 1;
-sigma = 0.3;
+
+% This is from running the grid search below.
+% Remove the return statement to run the grid search.
+C = 0.25629;
+sigma = 0.075938;
+return;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return the optimal C and sigma
@@ -23,8 +27,34 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+best_error = -1;
+temp_C = 0.01;
+temp_sigma = 0.01;
 
+multiply_by = 1.5;
 
+i = 0;
+while(temp_C <= 50)
+	j = 0;
+	while (temp_sigma <= 50)
+		fprintf('trying sigma %f, C %f\n', temp_sigma, temp_C);
+		model = svmTrain(X, y, temp_C, @(x1,x2) gaussianKernel(x1, x2, temp_sigma));
+		predictions = svmPredict(model, Xval);
+		error_rate = mean(double(predictions ~= yval))
+
+		if (best_error == -1 || error_rate < best_error)
+			C = temp_C;
+			sigma = temp_sigma;
+			best_error = error_rate;
+		endif
+		temp_sigma = temp_sigma * multiply_by;
+		j++;
+
+	endwhile
+	temp_sigma = 0.01;
+	temp_C = temp_C * multiply_by;
+	i++;
+endwhile
 
 
 
