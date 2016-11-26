@@ -21,7 +21,18 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for i=1:size(idx)
+	best_k = 0;
+	smallest_distance = -1;
+	for k=1:K
+		sq_distance = norm(X(i,:) - centroids(k,:)) ^ 2;
+		if (sq_distance <= smallest_distance || best_k == 0)
+			best_k = k;
+			smallest_distance = sq_distance;
+		endif;
+	end;
+	idx(i) = best_k;
+end;
 
 
 
