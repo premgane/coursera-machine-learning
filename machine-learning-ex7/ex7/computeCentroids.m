@@ -34,7 +34,9 @@ for i=1:m
 end;
 
 for k=1:K
-	centroids(k,:) = centroids(k,:) ./ count(k);
+	if (count(k) > 0)
+		centroids(k,:) = centroids(k,:) ./ count(k);
+	endif;
 end;
 
 
